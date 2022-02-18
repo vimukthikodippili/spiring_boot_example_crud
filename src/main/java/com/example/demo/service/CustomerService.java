@@ -4,7 +4,6 @@ import com.example.demo.dto.CustomerDTO;
 import com.example.demo.dto.paginated.PaginatedCustomerDTO;
 
 import javax.xml.bind.ValidationException;
-import java.util.ArrayList;
 
 public interface CustomerService {
     public String addCustomer(CustomerDTO dto) throws ValidationException;

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.xml.bind.ValidationException;
-import java.util.ArrayList;
+
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
@@ -38,8 +38,8 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerRepo.findById(id).orElseThrow(() ->
                 new EntryNotFoundException("Customer is not exists")
         );
-        customer.setCustomerID("DELETED");
-        return customerRepo.save(customer).getCustomerID().substring(4);
+        customerRepo.deleteById(id);
+       return id;
 
 
     }
