@@ -23,11 +23,21 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity saveCustomer(@RequestBody CustomerDTO dto) throws ValidationException {
-        System.out.println("mmm" +dto.getCustomerID()+ "ooo "+dto.getCustomerName());
+
         String id = customerService.addCustomer(dto);
 
         return new ResponseEntity(
                 new StandardResponse(201, id+" success added", null),
                 HttpStatus.CREATED);
     }
+    @PutMapping
+    public ResponseEntity updateCustomer(@RequestBody CustomerDTO dto){
+        String id= customerService.updateCustomer(dto);
+        return new ResponseEntity(
+          new StandardResponse(204,"done",id) ,HttpStatus.OK
+        );
+
+    }
+
+
 }
