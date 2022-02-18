@@ -9,11 +9,14 @@ import com.example.demo.repositry.CustomerRepo;
 import com.example.demo.service.CustomerService;
 import com.example.demo.util.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.xml.bind.ValidationException;
+import java.util.List;
 
 @Service
 @Transactional
@@ -46,14 +49,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public PaginatedCustomerDTO searchAllCustomer(int page, int pageSize) {
-        return new PaginatedCustomerDTO(
-                customerMapper.pageToCustomerDTO(customerRepo.
-                        findAll(
-                                  PageRequest.of(page,pageSize)
-                        )),
-                customerRepo.count(
-
-                ));
+        Pageable request = PageRequest.of(page, pageSize);
+        Page<Customer> all = customerRepo.findAll(request);
+        long count = customerRepo.count();
+        List<CustomerDTO> customerDTOS = customerMapper.pageToCustomerDTO(all);
+        PaginatedCustomerDTO paginatedCustomerDTO = new PaginatedCustomerDTO(customerDTOS, count);
+        return paginatedCustomerDTO;
     }
 
     @Override
@@ -94,5 +95,10 @@ public class CustomerServiceImpl implements CustomerService {
             throw new EntryNotFoundException("Customer is not exist");
         }
 
+    }
+
+    @Override
+    public PaginatedCustomerDTO searchByCustomerName(String name, int number, int size) {
+        return null;
     }
 }

@@ -17,4 +17,5 @@ public interface CustomerService {
 
     public String updateCustomer(CustomerDTO dto);
 
+    PaginatedCustomerDTO searchByCustomerName(String name, int number, int size);
 }
