@@ -10,10 +10,13 @@ import com.example.demo.service.CustomerService;
 import com.example.demo.util.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.xml.bind.ValidationException;
 import java.util.ArrayList;
-
+@Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
      private CustomerRepo customerRepo;
@@ -21,18 +24,12 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerMapper customerMapper;
     @Override
     public String addCustomer(CustomerDTO customerDTO) throws ValidationException {
-        if (!customerRepo.existsById(customerDTO.getCustomerID())){
+
             if (!customerRepo.existsById(customerDTO.getCustomerID())){
                 return customerRepo.save(customerMapper.toCustomer(customerDTO)).getCustomerID().substring(4);
             }else {
                 throw new EntryDuplicateException("Customer id is already exists");
             }
-        } else {
-            throw  new EntryDuplicateException("Customer is already exists");
-        }
-
-
-
 
     }
 

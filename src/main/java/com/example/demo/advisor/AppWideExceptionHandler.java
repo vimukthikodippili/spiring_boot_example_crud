@@ -4,15 +4,16 @@ import com.example.demo.exeption.EntryDuplicateException;
 import com.example.demo.exeption.EntryNotFoundException;
 import com.example.demo.util.StandardLogger;
 import com.example.demo.util.StandardResponse;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.validation.ConstraintViolationException;
+
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,13 +65,13 @@ public class AppWideExceptionHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler({UsernameNotFoundException.class})
-    protected ResponseEntity usernameNotFoundExceptionHandler(UsernameNotFoundException e){
-        LoggerHandler.handleLogger(new StandardLogger("error", e.getMessage()));
-        return new ResponseEntity(
-                new StandardResponse(404, "Username Not Found", e.getMessage()),
-                HttpStatus.NOT_FOUND);
-    }
+//    @ExceptionHandler({UsernameNotFoundException.class})
+//    protected ResponseEntity usernameNotFoundExceptionHandler(UsernameNotFoundException e){
+//        LoggerHandler.handleLogger(new StandardLogger("error", e.getMessage()));
+//        return new ResponseEntity(
+//                new StandardResponse(404, "Username Not Found", e.getMessage()),
+//                HttpStatus.NOT_FOUND);
+//    }
 
     @ExceptionHandler({SecurityException.class})
     public ResponseEntity servletException(SecurityException e){

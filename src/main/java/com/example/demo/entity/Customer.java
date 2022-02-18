@@ -4,7 +4,7 @@ import com.mysql.cj.xdevapi.JsonString;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.TypeDef;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class Customer implements SuperEntity {
     @Id
     @Column(name = "Customer_id", length = 45)
-    private String CustomerID;
+    private String customerID;
     @Column(name = "Customer_name", length = 45)
-    private String CustomerName;
+    private String customerName;
 }
