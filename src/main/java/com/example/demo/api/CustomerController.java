@@ -22,6 +22,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity saveCustomer(@RequestBody CustomerDTO dto) throws ValidationException {
+        System.out.println("hello"+dto);
 
         String id = customerService.addCustomer(dto);
 
@@ -61,10 +62,19 @@ public class CustomerController {
 //        return new ResponseEntity(new StandardResponse(200,"success", paginatedCustomerDTO),HttpStatus.OK);
 //    }
 
+
     @GetMapping(params = {"name", "pageNo", "size"})
-    public ResponseEntity<StandardResponse> searchByCustomerName(@RequestParam String name, @RequestParam int number, @RequestParam int size) {
-        customerService.searchByCustomerName(name, number, size);
-        return new ResponseEntity(new StandardResponse(),HttpStatus.OK);
+    public ResponseEntity<StandardResponse> searchByCustomerName(
+            @RequestParam String name,
+            @RequestParam int pageNo,
+            @RequestParam int size) {
+        System.out.println(name);
+        System.out.println(pageNo);
+        System.out.println(size);
+
+        PaginatedCustomerDTO paginatedCustomerDTO=null;
+        customerService.searchByCustomerName(name, pageNo, size);
+        return new ResponseEntity(new StandardResponse(200,"success",paginatedCustomerDTO),HttpStatus.OK);
     }
 
     @GetMapping(params = {"pageNo", "size"})

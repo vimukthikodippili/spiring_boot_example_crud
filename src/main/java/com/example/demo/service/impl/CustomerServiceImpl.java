@@ -99,6 +99,20 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public PaginatedCustomerDTO searchByCustomerName(String name, int number, int size) {
-        return null;
+        System.out.println("name "+name);
+        System.out.println("2 "+number);
+        System.out.println("2 "+size);
+
+return new PaginatedCustomerDTO(
+
+
+
+
+        customerMapper.pageToCustomerDTO(
+                customerRepo.findByCustomerNameEquals(
+                        name, PageRequest.of(number,size))),
+        customerRepo.countByCustomerNameEquals(name));
+
+
     }
 }

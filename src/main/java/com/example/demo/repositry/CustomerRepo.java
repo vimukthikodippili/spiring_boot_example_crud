@@ -17,6 +17,10 @@ public interface CustomerRepo extends JpaRepository<Customer,String> {
     Page<Customer>
     getAllBy( Pageable pageable);
     long countAllBy();
+    Page<Customer> findByCustomerNameEquals(String name, Pageable pageable);
+    long countByCustomerNameEquals(String name);
+
+
 
 
 

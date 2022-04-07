@@ -17,15 +17,14 @@ import javax.persistence.Table;
 @Table(name = "item")
 public class Item {
     @Id
-
-    @Column(name = "Item_code", length = 45)
+    //@Column(name = "Item_code", length = 45)
     private String ItemCode;
-    @Column(name = "Item_description", length = 45)
+   // @Column(name = "Item_description", length = 45)
     private String  Description;
-    @Column(name = "Item_packsize", length = 45)
+    //@Column(name = "Item_packsize", length = 45)
     private String PackSize;
-    @Column(name = "Item_qtyonhand", length = 45)
+   // @Column(name = "Item_qtyonhand", length = 45)
     private Integer  QtyOnHand;
-    @Column(name = "Item_unitprice", length = 45)
+    //@Column(name = "Item_unitprice", length = 45)
     private Double  UnitPrice;
 }

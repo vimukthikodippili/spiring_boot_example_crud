@@ -13,9 +13,12 @@ import com.example.demo.util.mapper.CustomerMapper;
 import com.example.demo.util.mapper.ItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.xml.bind.ValidationException;
-
+@Service
+@Transactional
 public class ItemServiceImpl  implements ItemService {
     @Autowired
     private ItemRepo itemRepo;
@@ -23,7 +26,7 @@ public class ItemServiceImpl  implements ItemService {
     private ItemMapper itemMapper;
 
     @Override
-    public String addItem(ItemDTO dto) throws ValidationException {
+    public String addItem(ItemDTO dto)  {
         if (!itemRepo.existsById(dto.getItemCode())){
             return itemRepo.save(itemMapper.toItem(dto)).getItemCode().substring(4);
         }
